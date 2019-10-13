@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="auth.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="js/vue-typed-js.css" />
+    <link rel="stylesheet" href="./ui/echo-ui.css" />
+    <script src="js/vue-typed-js.browser.js"></script>
+
+</head>
+
+<body>
+    <div id="main">
+        <div class="container" id="main" v-bind:style="{ filter: blurType }">
+            <div class="actor">
+                <template v-if="show == 1">
+                    <transition name="fade">
+                        <div id="message-box" v-if="show">
+                            <h3 id="name">Jane</h3>
+                            <vue-typed-js
+                                :strings="['Hi there! My name is Jane, and I am a tour guide from London. Please enter your name.']">
+                                <h2 class="typing" id="typed-text"></h2>
+                            </vue-typed-js>
+
+                            <div id="holder"></div>
+                        </div>
+                    </transition>
+                    <transition name="slide-fade">
+                        <img src="images/character.png" alt="" id="character" v-if="show">
+                    </transition>
+                </template>
+                <template v-if="show == 2">
+                    <div id="message-box" v-if="show">
+                        <h3 id="name">Jane</h3>
+                        <vue-typed-js
+                            :strings="['In London, many tourists from Russia, but they often remain dissatisfied with our trip.', 'They think our route is long and uninteresting. Please help me make a new plan for a tour of London!']">
+                            <h2 class="typing" id="typed-text"></h2>
+                        </vue-typed-js>
+
+                        <div id="holder"></div>
+                    </div>
+                    <img src="images/character.png" alt="" id="character" v-if="show">
+                </template>
+            </div>
+
+            <hr v-if="show == 1 || show == 2 || show == 3">
+
+            <div class="mail-enter">
+                <template v-if="show == 1">
+                    <input type="text" name="" class="echo-big-input" id="mail" v-model="name" autofocus
+                        placeholder="Ваше имя" />
+                    <input type="text" name="" class="echo-big-input" id="mail" v-model="form" autofocus
+                        placeholder="Ваш класс" style="width: 150px !important;" />
+
+                    <button type="button" class="echo-button" type='submit' @click='this.app.renderType(2)'>Дальше
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                </template>
+                <template v-if="show == 2">
+                    <button type="button" class="echo-button" @click='this.app.renderType(3)'
+                        style="width: 744px !important;">Дальше
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+
+                    </button>
+                </template>
+            </div>
+
+            <hr style="margin-top: 170px;" v-if="show == 1 || show == 2 || show == 3">
+            <div class="footer" v-if="show == 1 || show == 2 || show == 3">
+                <h1 id="social-logo">Важно:</h1>
+                <p id="social-text">На работу отводится 30 минут. В ходе работы вы будете искать полезную информацию на
+                    различных сайтах. При получении результата не закрывайте страницу, чтобы с вашим результатом
+                    ознакомился учитель
+                    ;)
+                </p>
+            </div>
+        </div>
+
+        <div id="dialog" v-if="show == 3">
+            <img src="images/Ellipse.png" alt="" id="ellipse">
+            <div id="messages">
+                <div class="message-dialog" style="width: 359px; ">
+                    <div class="left-arrow"></div>
+                    <p class="dialog-ellipse-message">{{name}}, thank you for agreeing to help me.</p>
+                </div>
+                <div class="message-dialog" style="width: 504px;">
+                    <div class="left-arrow"></div>
+                    <p class="dialog-ellipse-message">I send you links to sites where you will find useful information.
+                    </p>
+                </div>
+                <div class="message-dialog" style="width: 504px;">
+                    <div class="left-arrow"></div>
+                    <p class="dialog-ellipse-message">https://en.wikipedia.org/wiki/London</p>
+                </div>
+                <div class="message-dialog" style="width: 504px;">
+                    <div class="left-arrow"></div>
+                    <p class="dialog-ellipse-message">https://myenglandtravel.com/london-attractions.html</p>
+                </div>
+                <div class="message-dialog" style="width: 544px;">
+                    <div class="left-arrow"></div>
+                    <p class="dialog-ellipse-message">
+                        https://www.interactive-english.ru/topiki/567-london-attractions-list/</p>
+                </div>
+                <div class="message-dialog" style="width: 504px;">
+                    <div class="left-arrow"></div>
+                    <p class="dialog-ellipse-message">https://www.aviewoncities.com/london/londonattractions.htm</p>
+                </div>
+            </div>
+            <button type="button" class="echo-button" @click='this.app.renderType(4)'
+                style="width: 744px !important;">Дальше
+                <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                    <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                    <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none" />
+                </svg>
+
+            </button>
+        </div>
+        <div class="map" v-if="show == 4">
+            <h2 id="map-title">{{name}}, найдите и отметьте на карте точки важных для экскурсии достопримечательностей.
+            </h2>
+            <input type="checkbox" name="" id="" class="map-check" v-model="check1" style="left: 96%; top: 49%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check2" style="left: 98%; top: 57%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check4" style="left: 66%; top: 32%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check5" style="left: 46%; top: 30%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check6" style="left: 27%; top: 16%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check7" style="left: 40%; top: 38%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check8" style="left: 25%; top: 47%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check9" style="left: 4%; top: 69%;">
+            <input type="checkbox" name="" id="" class="map-check" v-model="check10" style="left: 19%; top: 66%;">
+            <button type="button" class="echo-button" @click='this.app.renderType(5)'
+                style="z-index: 55;position: absolute;top: 90%;">Дальше
+                <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                    <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                    <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none" />
+                </svg>
+
+            </button>
+            <img src="images/london.png" alt="" srcset="" id="london-map">
+        </div>
+        <div class="suspect" v-if="show == 5">
+
+            <h1 id="suspect-title">Викторина</h1>
+            <p id="suspect-text">Что является самой известной
+                достопримечательностью Лондона?
+            </p>
+            <div id="suspect-inputes" style="display: inline-flex; margin-top: 40px;">
+                <button type="button" class="echo-button" type='submit' @click="this.app.renderType('5+')" style="margin-left: 35px;">Биг-бен
+                    <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                        <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" fill="none" />
+                    </svg>
+                </button>
+                <button type="button" class="echo-button" type='submit' @click="this.app.renderType('5-')" style="margin-left: 125px;">Тауэр
+                    <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                        <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" fill="none" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="suspect" v-if="show == 6">
+
+                <h1 id="suspect-title">Викторина</h1>
+                <p id="suspect-text">Что находится в центре Трафальгарской площади?
+                </p>
+                <div id="suspect-inputes" style="display: inline-flex; margin-top: 40px;">
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('6+')" style="margin-left: 35px;">Колонна
+                            Нельсона
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('6-')" style="margin-left: 125px;">Синий петух
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                </div>
+        </div>
+        <div class="suspect" v-if="show == 7">
+
+                <h1 id="suspect-title">Викторина</h1>
+                <p id="suspect-text">Что находится в Тауэре?
+                </p>
+                <div id="suspect-inputes" style="display: inline-flex; margin-top: 40px;">
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('7-')" style="margin-left: 35px;">Восковые фигуры
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('7+')" style="margin-left: 125px;">Драгоценности короны
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                </div>
+        </div>
+        <div class="suspect" v-if="show == 8">
+
+                <h1 id="suspect-title">Викторина</h1>
+                <p id="suspect-text">Чем известна площадь Пикадилли?
+                </p>
+                <div id="suspect-inputes" style="display: inline-flex; margin-top: 40px;">
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('8-')" style="margin-left: 35px;">Это
+                            крупнейший
+                            парк Лондона
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('8+')" style="margin-left: 125px;">Это место
+                            встречи шести
+                            улиц
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                </div>
+        </div>
+        <div class="suspect" v-if="show == 9">
+
+                <h1 id="suspect-title">Викторина</h1>
+                <p id="suspect-text">Через какую реку проложен Тауэрский мост?
+                </p>
+                <div id="suspect-inputes" style="display: inline-flex; margin-top: 40px;">
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('9-')" style="margin-left: 35px;">Танос
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('9+')" style="margin-left: 125px;">Темза
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                </div>
+        </div>
+        <div class="suspect" v-if="show == 10">
+
+                <h1 id="suspect-title">Викторина</h1>
+                <p id="suspect-text">Как называется самый известный парк Лондона?
+                </p>
+                <div id="suspect-inputes" style="display: inline-flex; margin-top: 40px;">
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('10+')" style="margin-left: 35px;">Гайд-парк
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                    <button type="button" class="echo-button" type='submit' @click="this.app.renderType('10+')" style="margin-left: 125px;">Вестминстерский парк
+                        <svg id="next_arrow" class="next_arrow" viewBox="0 0 35 35">
+                            <path d="M17.5001 23.3333L23.3334 17.5L17.5001 11.6666" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M11.6667 17.5H23.3334" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" fill="none" />
+                        </svg>
+                    </button>
+                </div>
+        </div>
+        <div class="suspect" v-if="show == 11">
+
+                <h1 id="suspect-title">Результаты</h1>
+                <p id="suspect-text">{{name}}, {{form}}, ваши результаты:
+                </p>
+                <p id="suspect-text">{{points}} баллов. Оценка {{score}}.
+                </p>
+        </div>
+    </div>
+
+</body>
+
+<script src="js/auth.js"></script>
+
+</html>
+<script>
+    app.renderType(1);
+</script>
